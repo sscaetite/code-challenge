@@ -1,4 +1,4 @@
-import {Box, Button, Card, CardContent, CardMedia} from "@material-ui/core"
+import {Box, Button, Card, CardContent, CardMedia, Typography} from "@material-ui/core"
 import {useHistory} from "react-router-dom"
 
 const UserPage = ({users, albums, photos, match}) => {
@@ -32,27 +32,32 @@ const UserPage = ({users, albums, photos, match}) => {
 	)
 
 	return(
-		<Box style={{display: 'flex', flexWrap: 'wrap'}}>
-			{albums
-				.filter((album) => album.userId.toString() === params.id)
-				.map((album) => (
-					<Card 
-						key={album.id}
-						style={{width: 150, margin: 5, cursor: 'pointer'}}
-						onClick={() => goToAlbum(album.id)}
-					>
-						<CardMedia
-							style={{height: 150, width: 150, display: 'inline-block'}}
-							image={getPhotoThumbnail(album)}
-							title={getPhotoTitle(album)}
-						/>
-						<CardContent>
-							{album.title[0].toUpperCase() + album.title.slice(1)}
-						</CardContent>
-					</Card>
-				))
-			}
-		</Box>
+		<>
+			<Typography style={{margin: 5, fontSize: '1.6em'}}>
+				Álbuns de {(users.find((user) => user.id.toString() === params.id)).name}
+			</Typography>
+			<Box style={{display: 'flex', flexWrap: 'wrap'}}>
+				{albums
+					.filter((album) => album.userId.toString() === params.id)
+					.map((album) => (
+						<Card 
+							key={album.id}
+							style={{width: 150, margin: 5, cursor: 'pointer'}}
+							onClick={() => goToAlbum(album.id)}
+						>
+							<CardMedia
+								style={{height: 150, width: 150, display: 'inline-block'}}
+								image={getPhotoThumbnail(album)}
+								title={getPhotoTitle(album)}
+							/>
+							<CardContent>
+								{album.title[0].toUpperCase() + album.title.slice(1)}
+							</CardContent>
+						</Card>
+					))
+				}
+			</Box>
+		</>
 	)
 }
 

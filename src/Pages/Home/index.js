@@ -1,4 +1,4 @@
-import {Box, Card, CardContent, Button} from "@material-ui/core"
+import {Box, Card, CardContent, Button, Typography} from "@material-ui/core"
 import {useHistory} from "react-router-dom"
 
 const HomePage = ({users}) => {
@@ -7,6 +7,9 @@ const HomePage = ({users}) => {
 	const goToUserPage = (id) => push(`/user/${id}`)
 	return(
 		<Box>
+			<Typography style={{margin: 5, fontSize: '1.6em'}}>
+				Usuários
+			</Typography>
 			{users.map((user) => (
 				<Card key={user.id} style={{margin: 5}}>
 					<CardContent 
